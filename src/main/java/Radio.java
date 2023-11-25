@@ -1,52 +1,66 @@
 public class Radio {
-    private int station;
-    private int volume;
+    private int currentVolume;
+    private int maxNumberStation;
+    private int minNumberStation;
+    private int currentStation;
 
-    public void setStation(int newStation) {
-        if (newStation < 0) {
-            return;
-        }
+    public Radio(int stationCount) {
+        this.maxNumberStation = stationCount - 1;
+    }
 
-        if (newStation > 9) {
-            return;
-        }
+    public Radio() {
+        this.maxNumberStation = 9;
+    }
 
-        station = newStation;
+    public int getMaxNumberStation() {
+        return maxNumberStation;
     }
 
     public int getStation() {
-        return station;
+        return currentStation;
     }
 
-    public int getVolume() {
-        return volume;
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
+    public void setStation(int currentStation) {
+        if (currentStation < minNumberStation) {
+            return;
+        }
+
+        if (currentStation > maxNumberStation) {
+            return;
+        }
+
+        this.currentStation = currentStation;
     }
 
     public void next() {
-        if (station == 9) {
-            station = 0;
+        if (currentStation == maxNumberStation) {
+            currentStation = minNumberStation;
         } else {
-            station = station + 1;
+            currentStation = currentStation + 1;
         }
     }
 
     public void prev() {
-        if (station == 0) {
-            station = 9;
+        if (currentStation == minNumberStation) {
+            currentStation = maxNumberStation;
         } else {
-            station = station - 1;
+            currentStation = currentStation - 1;
         }
     }
 
     public void increaseVolume() {
-        if (volume < 100) {
-            volume = volume + 1;
+        if (currentVolume < 100) {
+            currentVolume = currentVolume + 1;
         }
     }
 
     public void decreaseVolume() {
-        if (volume > 0) {
-            volume = volume - 1;
+        if (currentVolume > 0) {
+            currentVolume = currentVolume - 1;
         }
     }
 }
